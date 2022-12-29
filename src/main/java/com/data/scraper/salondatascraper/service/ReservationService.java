@@ -16,6 +16,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 @Service
@@ -47,8 +49,11 @@ public class ReservationService {
             // Add more cell values as needed
         }
 
-        // Save the file
-        try (OutputStream fileOut = new FileOutputStream(new Random().nextInt(1000)+"file.xlsx")) {
+        Date now = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_d_HH_mm_ss");
+
+        String dateString = formatter.format(now);
+        try (OutputStream fileOut = new FileOutputStream(dateString+"_file.xlsx")) {
             workbook.write(fileOut);
         }
     }
